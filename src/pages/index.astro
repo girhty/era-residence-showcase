@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import { residences, amenities, locationPoints } from '../data/residenceData';
+---
+
+<Layout>
+  <main>
+    <section class="relative flex min-h-screen items-end overflow-hidden px-6 pb-16 pt-32 lg:px-10">
+      <img class="hero-image absolute inset-0 h-full w-full object-cover" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2200&q=90" alt="Warm contemporary luxury residence interior" />
+      <div class="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/50 to-ink/20"></div>
+      <div class="relative mx-auto w-full max-w-7xl">
+        <p class="hero-item mb-6 text-[10px] uppercase tracking-luxury text-brass">A residence above the ordinary</p>
+        <h1 class="hero-item max-w-4xl font-display text-5xl leading-[1.02] text-white sm:text-7xl lg:text-8xl">Elevated Living<br /><em class="font-normal text-brass">in the Heart</em> of the City</h1>
+        <div class="hero-item mt-12 flex flex-wrap gap-8 border-t border-white/25 pt-5 text-[10px] uppercase tracking-luxury text-slate-200">
+          <span>35 Floors</span><span>120 Residences</span><span>Delivery Q4 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="story" class="mx-auto grid max-w-7xl gap-14 px-6 py-28 lg:grid-cols-2 lg:px-10 lg:py-40">
+      <div class="reveal self-center">
+        <p class="text-[10px] uppercase tracking-luxury text-brass">The Era perspective</p>
+        <h2 class="mt-5 font-display text-4xl leading-tight text-white sm:text-6xl">Designed for the way <em class="text-brass">life feels.</em></h2>
+        <p class="mt-8 max-w-lg text-base leading-8 text-mist">Era is a considered collection of 120 residences, shaped by light, material and an unwavering belief in better everyday moments. Here, the city is not just around you—it is beneath you.</p>
+        <a href="#residences" class="mt-9 inline-flex border-b border-brass pb-2 text-xs uppercase tracking-luxury text-brass">Explore the residences <span class="ml-5">↗</span></a>
+      </div>
+      <div class="reveal relative min-h-[500px] overflow-hidden">
+        <img class="parallax-image h-[115%] w-full object-cover" src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=1400&q=85" alt="Minimal living room with city views" loading="lazy" />
+        <div class="absolute bottom-5 left-5 border border-white/30 bg-ink/60 px-5 py-4 backdrop-blur"><p class="text-[10px] uppercase tracking-luxury text-brass">01 / Atmosphere</p></div>
+      </div>
+    </section>
+
+    <section id="residences" class="bg-charcoal px-6 py-28 lg:px-10 lg:py-36">
+      <div class="mx-auto max-w-7xl">
+        <div class="reveal flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div><p class="text-[10px] uppercase tracking-luxury text-brass">The collection</p><h2 class="mt-4 font-display text-4xl text-white sm:text-6xl">Find your <em class="text-brass">era.</em></h2></div>
+          <div id="filters" class="flex gap-5 overflow-x-auto text-[10px] uppercase tracking-luxury text-slate-400">
+            <button class="filter active text-brass" data-filter="All">All</button><button class="filter" data-filter="1-Bedroom">1-Bedroom</button><button class="filter" data-filter="2-Bedroom">2-Bedroom</button><button class="filter" data-filter="Penthouse">Penthouse</button>
+          </div>
+        </div>
+        <div id="residenceGrid" class="mt-14 grid gap-6 md:grid-cols-3">
+          {residences.map((unit) => <div class="unit reveal" data-type={unit.type}><Card title={unit.name} eyebrow={unit.type} text={`${unit.size}  ·  ${unit.rooms}`} image={unit.image} /><div class="flex items-center justify-between border border-t-0 border-white/10 px-5 py-4 text-xs"><span class="text-mist">{unit.price}</span><button class="text-brass" aria-label={`View ${unit.name} floor plan`}>View plan +</button></div></div>)}
+        </div>
+      </div>
+    </section>
+
+    <section id="amenities" class="px-6 py-28 lg:px-10 lg:py-36">
+      <div class="mx-auto max-w-7xl">
+        <div class="reveal mb-12"><p class="text-[10px] uppercase tracking-luxury text-brass">The experience</p><h2 class="mt-4 font-display text-4xl text-white sm:text-6xl">Life, <em class="text-brass">well considered.</em></h2></div>
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{amenities.map((item) => <Card title={item.title} text={item.text} image={item.image} class="reveal" />)}</div>
+      </div>
+    </section>
+
+    <section id="location" class="bg-charcoal px-6 py-28 lg:px-10 lg:py-36">
+      <div class="mx-auto grid max-w-7xl gap-14 lg:grid-cols-2">
+        <div class="reveal"><p class="text-[10px] uppercase tracking-luxury text-brass">The neighbourhood</p><h2 class="mt-4 font-display text-4xl text-white sm:text-6xl">Everything,<br /><em class="text-brass">within reach.</em></h2><p class="mt-7 max-w-md leading-7 text-mist">Set between the energy of the city and the calm of the river, Era places the best of the capital at your doorstep.</p><div class="mt-12 grid grid-cols-2 gap-px bg-white/10">{locationPoints.map(([place, time, category]) => <div class="bg-charcoal p-5"><p class="text-2xl font-display text-white">{time}</p><p class="mt-2 text-sm text-slate-300">{place}</p><p class="mt-1 text-[9px] uppercase tracking-luxury text-brass">{category}</p></div>)}</div></div>
+        <div class="reveal relative min-h-[480px] overflow-hidden"><img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1400&q=85" alt="City skyline at dusk" loading="lazy" /><div class="absolute inset-0 flex items-center justify-center"><div class="flex h-24 w-24 items-center justify-center rounded-full border border-brass bg-ink/50 text-center text-[9px] uppercase tracking-luxury text-brass backdrop-blur">Explore<br />the area</div></div></div>
+      </div>
+    </section>
+
+    <section class="px-6 py-28 lg:px-10 lg:py-36">
+      <div class="mx-auto max-w-7xl"><div class="reveal mb-12 flex items-end justify-between"><div><p class="text-[10px] uppercase tracking-luxury text-brass">A visual language</p><h2 class="mt-4 font-display text-4xl text-white sm:text-6xl">The Era <em class="text-brass">journal.</em></h2></div><span class="hidden text-xs text-mist md:block">01 — 04</span></div><div class="grid gap-5 md:grid-cols-12"><div class="reveal md:col-span-7"><Card title="Light, material, space" eyebrow="Architecture" image="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85" class="min-h-[520px]" /></div><div class="reveal md:col-span-5 md:mt-20"><Card title="A quieter kind of luxury" eyebrow="Interiors" image="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1100&q=85" class="min-h-[400px]" /></div></div></div>
+    </section>
+
+    <section id="contact" class="bg-brass px-6 py-24 text-ink lg:px-10 lg:py-32">
+      <div class="mx-auto grid max-w-7xl gap-14 lg:grid-cols-2">
+        <div><p class="text-[10px] uppercase tracking-luxury">Private appointments</p><h2 class="mt-5 font-display text-5xl leading-tight sm:text-7xl">Make room<br /><em>for more.</em></h2><p class="mt-7 max-w-sm leading-7">Register your interest to receive the private brochure or arrange a personal viewing at our sales gallery.</p></div>
+        <form class="grid gap-5" onsubmit="event.preventDefault(); this.querySelector('[data-success]').textContent='Thank you — our team will be in touch shortly.'">
+          <label class="text-xs">Your name<input required name="name" class="mt-2 w-full border-b border-ink/40 bg-transparent py-3 outline-none placeholder:text-ink/60" placeholder="Full name" /></label>
+          <label class="text-xs">Email address<input required type="email" name="email" class="mt-2 w-full border-b border-ink/40 bg-transparent py-3 outline-none placeholder:text-ink/60" placeholder="you@example.com" /></label>
+          <label class="text-xs">I am interested in<select class="mt-2 w-full border-b border-ink/40 bg-transparent py-3 outline-none"><option>Choosing a residence</option><option>Booking a viewing</option><option>Receiving the brochure</option></select></label>
+          <button class="mt-5 border border-ink px-6 py-4 text-xs uppercase tracking-luxury transition hover:bg-ink hover:text-brass">Submit enquiry ↗</button><p data-success class="text-sm" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from('.hero-item', { y: 35, opacity: 0, duration: 1, stagger: 0.14, ease: 'power3.out', delay: 0.25 });
+    gsap.to('.hero-image', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: 'section', start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.to('.parallax-image', { yPercent: -9, ease: 'none', scrollTrigger: { trigger: '.parallax-image', start: 'top bottom', end: 'bottom top', scrub: true } });
+    gsap.utils.toArray('.reveal').forEach((element) => {
+      gsap.from(element, { y: 35, opacity: 0, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: element, start: 'top 88%', once: true } });
+    });
+
+    document.querySelectorAll('.filter').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.filter').forEach((item) => item.classList.remove('active', 'text-brass'));
+        button.classList.add('active', 'text-brass');
+        const filter = button.dataset.filter;
+        document.querySelectorAll('.unit').forEach((unit) => {
+          unit.classList.toggle('hidden', filter !== 'All' && unit.dataset.type !== filter);
+        });
+      });
+    });
+  </script>
+</Layout>
